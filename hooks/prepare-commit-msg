@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+INPUT_FILE=$1
+PATTERN="^(chore|feat|fix|break|release|hotfix)!{0,1}: [A-Z][A-Z]+-[0-9]+ .+"
+START_LINE=`head -n1 $INPUT_FILE`
+#PATTERN="^(EE)-[[:digit:]]+: "
+if ! [[ "$START_LINE" =~ $PATTERN ]]; then
+  echo "Bad commit message, see example: fix: EE-123: commit message"
+  exit 1
+fi
